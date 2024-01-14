@@ -154,7 +154,7 @@ int main(int argc, char *argv[])
             U = HbyA - rAU*fvc::grad(p);
             U.correctBoundaryConditions();
         }
-         #include TEqn.H
+         #include "TEqn.H"
 //add these lines...
        /* fvScalarMatrix TEqn//fvScalarMatrix是一个class
         (
