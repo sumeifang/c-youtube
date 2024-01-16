@@ -1,0 +1,39 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+comfort
+{
+    // Mandatory entries
+    type            comfort;
+    libs            (fieldFunctionObjects);
+
+    // Optional entries
+    clothing        0.5;//The insulation value of the cloth
+    metabolicRate   1.2;//The metabolic rate
+    extWork         0.0;//The external work
+    Trad            300.0;//Radiation temperature
+    relHumidity     60.0;
+    pSat            0.0;//Saturation pressure of water
+    tolerance       1e-4;//Residual control for the cloth temperature
+    maxClothIter    100;//Maximum number of iterations
+    meanVelocity    false;//Flag to use a constant mean velocity in the whole domain
+
+    // Inherited entries
+    region          air;
+    enabled         true;
+    log             true;
+    timeStart       0;
+    timeEnd         10000;
+    executeControl  writeTime;
+    executeInterval -1;
+    writeControl    writeTime;
+    writeInterval   -1;
+}
+
+
+// ************************************************************************* //

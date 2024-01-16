@@ -1,0 +1,19 @@
+# Wavefront OBJ file written 2024-01-15T14:45:05
+o glasswall_edgeMesh
+
+# points : 4
+# lines  : 4
+
+# <points count="4">
+v 55.55586 8.357841 46.42857
+v 10.55586 8.357841 46.42857
+v 10.55586 53.35784 46.42857
+v 55.55586 53.35784 46.42857
+# </points>
+
+# <edges count="4">
+l 1 2
+l 2 3
+l 3 4
+l 4 1
+# </edges>

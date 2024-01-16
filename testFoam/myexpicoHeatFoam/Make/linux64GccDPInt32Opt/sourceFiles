@@ -1,0 +1,4 @@
+SOURCE = \
+myexpicoHeatFoam.C \
+
+# sources

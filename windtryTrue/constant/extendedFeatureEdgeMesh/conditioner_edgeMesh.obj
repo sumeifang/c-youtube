@@ -1,0 +1,23 @@
+# Wavefront OBJ file written 2024-01-03T17:15:33
+o conditioner_edgeMesh
+
+# points : 6
+# lines  : 6
+
+# <points count="6">
+v 26.89028 16.18641 22
+v 25.01939 16.18641 22
+v 25.01939 31.63058 22
+v 26.89028 31.63058 22
+v 26.89028 23.90849 22
+v 25.01939 23.90849 22
+# </points>
+
+# <edges count="6">
+l 5 1
+l 1 2
+l 2 6
+l 3 4
+l 4 5
+l 6 3
+# </edges>

@@ -1,0 +1,100 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      radiationProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+radiation       on;
+
+radiationModel  fvDOM;
+
+fvDOMCoeffs
+{
+    nPhi        3;      // azimuthal angles in PI/2 on X-Y.(from Y to X)
+    nTheta      6;      // polar angles in PI (from Z to X-Y plane)
+    maxIter     25;     // maximum number of iterations
+    tolerance   2e-2;   // convergence criteria for radiation iteration
+
+    useSolarLoad      false;
+
+    useExternalBeam   true;
+
+    // Energy spectrum for the external beam
+    spectralDistribution (1);
+}
+
+solarCalculatorCoeffs
+{
+    sunDirectionModel    tracking;
+
+	sunTrackingUpdateInterval 800;//Interval to update the Sun direction[decimal hours]
+    localStandardMeridian   8;      // GMT offset (hours)
+    startDay                183;    // day of the year
+    startTime               8;     // time of the day (hours decimal)
+    longitude               108.55; // longitude (degrees)
+    latitude                34.15; // latitude (degrees)
+	gridUp                  (0 0 1);//Grid orientation upwards
+    gridEast                (1 0 0);//Grid orientation eastwards
+
+
+    sunLoadModel    fairWeather;
+
+        // Fair weather conditions model constants
+        // Calculate beta from the Solar calculator or input
+        groundReflectivity 0.2;
+        A       800;   // Apparent solar irradiation at air mass m = 0
+        B       0.142; // Atmospheric extinction coefficient
+        C       0.058; // Solar diffusivity constant
+        //beta    45;  // Solar altitude (in degrees) above the horizontal
+		spectralDistribution (2 1);
+		//Radiative flux coupling flags
+		solidCoupled  true;//Coupled through Qr the solid regions(default true)
+		wallCoupled false;//Coupled through Qr wall patched(default false)
+		
+		// Reflecting rays
+		useReflectedRays true;
+			reflecting
+			{
+				nPhi        10;
+				nTheta      10;
+			}
+
+		absorptionEmissionModel none;
+		scatterModel            none;
+		sootModel               none;
+    // see solarCalculator.H for other model examples and details
+}
+
+// Number of flow iterations per radiation iteration
+solverFreq 10;
+
+absorptionEmissionModel multiBandAbsorptionEmission;
+
+multiBandAbsorptionEmissionCoeffs
+{
+    absorptivity  (0);
+    emissivity    (0);
+
+   /* zones
+    {
+        absorptivity  ("trees" (20 20));
+        emissivity    ("trees" (20 20));
+    }*/
+}
+
+scatterModel    none;
+
+sootModel       none;
+
+
+// ************************************************************************* //
