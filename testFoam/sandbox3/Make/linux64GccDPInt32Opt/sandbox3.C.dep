@@ -867,11 +867,6 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/RootsI.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/linearEqnI.H \
 cubicEqn.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/cubicEqnI.H \
-$(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/setRootCaseLists.H \
-$(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/setRootCaseListOptions.H \
-$(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/setRootCase.H \
-$(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/foamDlOpenLibs.H \
-$(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/setRootCaseListOutput.H \
-$(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/createTime.H \
+./demonstrations/templateDemo.H \
 
 #END
