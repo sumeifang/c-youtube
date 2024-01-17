@@ -5,7 +5,7 @@
     \\  /    A nd           | www.openfoam.com
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
-    Copyright (C) 2024 AUTHOR,AFFILIATION
+    Copyright (C) 2011-2013 OpenFOAM Foundation
 -------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
@@ -23,48 +23,68 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
-Application
-    sandbox2
+Class
+    Foam::faceAreaPairGAMGAgglomeration
 
 Description
+    Agglomerate using the pair algorithm.
+
+SourceFiles
+    faceAreaPairGAMGAgglomeration.C
 
 \*---------------------------------------------------------------------------*/
 
-#include "fvCFD.H"
-#include "linearEqn.H"
-#include "cubicEqn.H"
-#include "templateDemo.H"
+#ifndef faceAreaPairGAMGAgglomeration_H
+#define faceAreaPairGAMGAgglomeration_H
+
+#include "pairGAMGAgglomeration.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-int main(int argc, char *argv[])
+namespace Foam
 {
 
-    //#include "foamNamespaceDemo.H"
-    //#include "linearDemo.H"
-    //#include "cubicDemo.H"
-    //#include "runTimeDemo.H"
+/*---------------------------------------------------------------------------*\
+                 Class faceAreaPairGAMGAgglomeration Declaration
+\*---------------------------------------------------------------------------*/
 
-    
-    float a = 2.23;
-    // float b = returnNumber(a);
-    float b = returnNumber<float>(a);//使用template
-    Info << "b is " << b << endl;
+class faceAreaPairGAMGAgglomeration
+:
+    public pairGAMGAgglomeration
+{
 
-    int d=5.65;
-    //int e=returnNumber(d);
-    int e=returnNumber<int>(d);//使用template
-    Info << "e is " << e << endl;
+public:
 
-    scalar scalar1;
-    scalar1=10.2;
-    scalar scalar2=returnNumber<scalar>(scalar1);
-    Info << "scalar value is " << scalar2 << endl;
+    //- Runtime type information
+    TypeName("faceAreaPair");
 
-    printClass<int> obj1(a);
-    printClass<int> obj2;
 
-    return 0;
-}
+    // Constructors
 
+        //- Construct given mesh and controls
+        faceAreaPairGAMGAgglomeration
+        (
+            const lduMesh& mesh,
+            const dictionary& controlDict
+        );
+
+        //- Construct given mesh and controls
+        faceAreaPairGAMGAgglomeration
+        (
+            const lduMesh& mesh,
+            const scalarField& cellVolumes,
+            const vectorField& faceAreas,
+            const dictionary& controlDict
+        );
+};
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+} // End namespace Foam
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#endif
 
 // ************************************************************************* //

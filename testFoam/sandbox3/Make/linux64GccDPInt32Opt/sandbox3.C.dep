@@ -634,7 +634,7 @@ $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/geometricZeroFieldI.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvcDdt.C \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/ddtScheme.H \
 $(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/ddtScheme.C \
-$(WM_PROJECT_DIR)/src/finiteVolume/lnInclude/fvMatrix.H \
+fvMatrix.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/lduMatrix.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/profilingTrigger.H \
 $(WM_PROJECT_DIR)/src/OpenFOAM/lnInclude/lduMatrixTemplates.C \

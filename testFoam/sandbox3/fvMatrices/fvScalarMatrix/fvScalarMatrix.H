@@ -5,7 +5,7 @@
     \\  /    A nd           | www.openfoam.com
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
-    Copyright (C) 2024 AUTHOR,AFFILIATION
+    Copyright (C) 2011-2013 OpenFOAM Foundation
 -------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
@@ -23,48 +23,66 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
-Application
-    sandbox2
+InClass
+    Foam::fvMatrix
 
 Description
+    A scalar instance of fvMatrix
+
+SourceFiles
+    fvScalarMatrix.C
 
 \*---------------------------------------------------------------------------*/
 
-#include "fvCFD.H"
-#include "linearEqn.H"
-#include "cubicEqn.H"
-#include "templateDemo.H"
+#ifndef Foam_fvScalarMatrix_H
+#define Foam_fvScalarMatrix_H
+
+#include "fvMatrix.H"
+#include "fvMatricesFwd.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-int main(int argc, char *argv[])
+namespace Foam
 {
 
-    //#include "foamNamespaceDemo.H"
-    //#include "linearDemo.H"
-    //#include "cubicDemo.H"
-    //#include "runTimeDemo.H"
+// * * * * * * * * * * * * * * * Member Functions  * * * * * * * * * * * * * //
 
-    
-    float a = 2.23;
-    // float b = returnNumber(a);
-    float b = returnNumber<float>(a);//使用template
-    Info << "b is " << b << endl;
+// Set reference level for a component of the solution
+// on a given patch face
+template<>
+void fvMatrix<scalar>::setComponentReference
+(
+    const label patchi,
+    const label facei,
+    const direction,
+    const scalar value
+);
 
-    int d=5.65;
-    //int e=returnNumber(d);
-    int e=returnNumber<int>(d);//使用template
-    Info << "e is " << e << endl;
+template<>
+autoPtr<fvMatrix<scalar>::fvSolver> fvMatrix<scalar>::solver(const dictionary&);
 
-    scalar scalar1;
-    scalar1=10.2;
-    scalar scalar2=returnNumber<scalar>(scalar1);
-    Info << "scalar value is " << scalar2 << endl;
+template<>
+solverPerformance fvMatrix<scalar>::fvSolver::solve(const dictionary&);
 
-    printClass<int> obj1(a);
-    printClass<int> obj2;
+template<>
+solverPerformance fvMatrix<scalar>::solveSegregated(const dictionary&);
 
-    return 0;
-}
+template<>
+tmp<scalarField> fvMatrix<scalar>::residual() const;
 
+template<>
+tmp<volScalarField> fvMatrix<scalar>::H() const;
+
+template<>
+tmp<volScalarField> fvMatrix<scalar>::H1() const;
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+} // End namespace Foam
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#endif
 
 // ************************************************************************* //

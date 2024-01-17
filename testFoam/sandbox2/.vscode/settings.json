@@ -2,6 +2,7 @@
     "files.associations": {
         "myexpicoHeatFoam.C": "cpp",
         "sandbox3.C": "cpp",
-        "Test-volField.C": "cpp"
+        "Test-volField.C": "cpp",
+        "simpleFoam.C": "cpp"
     }
 }

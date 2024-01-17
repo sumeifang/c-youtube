@@ -5,7 +5,8 @@
     \\  /    A nd           | www.openfoam.com
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
-    Copyright (C) 2024 AUTHOR,AFFILIATION
+    Copyright (C) 2020 DLR
+    Copyright (C) 2021 OpenCFD Ltd.
 -------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
@@ -23,48 +24,54 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
-Application
-    sandbox2
-
-Description
-
 \*---------------------------------------------------------------------------*/
 
-#include "fvCFD.H"
-#include "linearEqn.H"
-#include "cubicEqn.H"
-#include "templateDemo.H"
+#include "multiDimPolyFunctions.H"
+#include "error.H"
+
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
+
+namespace Foam
+{
+    defineTypeNameAndDebug(multiDimPolyFunctions, 0);
+    defineRunTimeSelectionTable(multiDimPolyFunctions, word);
+}
+
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-int main(int argc, char *argv[])
+Foam::autoPtr<Foam::multiDimPolyFunctions> Foam::multiDimPolyFunctions::New
+(
+    const word& multiDimPolyFunctionsType,
+    const labelVector& dirs
+)
 {
+    auto* ctorPtr = wordConstructorTable(multiDimPolyFunctionsType);
 
-    //#include "foamNamespaceDemo.H"
-    //#include "linearDemo.H"
-    //#include "cubicDemo.H"
-    //#include "runTimeDemo.H"
+    if (!ctorPtr)
+    {
+        FatalErrorInLookup
+        (
+            "multiDimPolyFunction",
+            multiDimPolyFunctionsType,
+            *wordConstructorTablePtr_
+        ) << exit(FatalError);
+    }
 
-    
-    float a = 2.23;
-    // float b = returnNumber(a);
-    float b = returnNumber<float>(a);//使用template
-    Info << "b is " << b << endl;
-
-    int d=5.65;
-    //int e=returnNumber(d);
-    int e=returnNumber<int>(d);//使用template
-    Info << "e is " << e << endl;
-
-    scalar scalar1;
-    scalar1=10.2;
-    scalar scalar2=returnNumber<scalar>(scalar1);
-    Info << "scalar value is " << scalar2 << endl;
-
-    printClass<int> obj1(a);
-    printClass<int> obj2;
-
-    return 0;
+    return autoPtr<multiDimPolyFunctions>(ctorPtr(dirs));
 }
+
+
+// * * * * * * * * * * * * * * * * Constructors  * * * * * * * * * * * * * * //
+
+Foam::multiDimPolyFunctions::multiDimPolyFunctions(const labelVector& dirs)
+:
+    nTerms_(-1),
+    geomDir_(dirs),
+    geomCorrection_(pos0(dirs.x()), pos0(dirs.y()), pos0(dirs.z())),
+    coeffs_(),
+    termValues_()
+{}
 
 
 // ************************************************************************* //

@@ -5,7 +5,7 @@
     \\  /    A nd           | www.openfoam.com
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
-    Copyright (C) 2024 AUTHOR,AFFILIATION
+    Copyright (C) 2011 OpenFOAM Foundation
 -------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
@@ -23,48 +23,26 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
-Application
-    sandbox2
+InClass
+    Foam::fvMatrix
 
 Description
+    A special matrix type and solver, designed for finite volume
+    solutions of scalar equations.
+
+    Face addressing is used to make all matrix assembly and solution loops
+    vectorise.
 
 \*---------------------------------------------------------------------------*/
 
-#include "fvCFD.H"
-#include "linearEqn.H"
-#include "cubicEqn.H"
-#include "templateDemo.H"
+#ifndef fvMatrices_H
+#define fvMatrices_H
+
+#include "fvMatricesFwd.H"
+#include "fvScalarMatrix.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-int main(int argc, char *argv[])
-{
-
-    //#include "foamNamespaceDemo.H"
-    //#include "linearDemo.H"
-    //#include "cubicDemo.H"
-    //#include "runTimeDemo.H"
-
-    
-    float a = 2.23;
-    // float b = returnNumber(a);
-    float b = returnNumber<float>(a);//使用template
-    Info << "b is " << b << endl;
-
-    int d=5.65;
-    //int e=returnNumber(d);
-    int e=returnNumber<int>(d);//使用template
-    Info << "e is " << e << endl;
-
-    scalar scalar1;
-    scalar1=10.2;
-    scalar scalar2=returnNumber<scalar>(scalar1);
-    Info << "scalar value is " << scalar2 << endl;
-
-    printClass<int> obj1(a);
-    printClass<int> obj2;
-
-    return 0;
-}
-
+#endif
 
 // ************************************************************************* //

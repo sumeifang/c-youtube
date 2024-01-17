@@ -5,7 +5,7 @@
     \\  /    A nd           | www.openfoam.com
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
-    Copyright (C) 2024 AUTHOR,AFFILIATION
+    Copyright (C) 2020 DLR
 -------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
@@ -23,48 +23,74 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
-Application
-    sandbox2
+Class
+    Foam::polyDegree1
 
 Description
+    First degree polynominal function
+
+    \verbatim
+    c0 + c1*x + c2*y + c3*z
+    \endverbatim
+
+    Original code supplied by Henning Scheufler, DLR (2019)
+
+SourceFiles
+    polyDegree1.C
 
 \*---------------------------------------------------------------------------*/
 
-#include "fvCFD.H"
-#include "linearEqn.H"
-#include "cubicEqn.H"
-#include "templateDemo.H"
+#ifndef polyDegree1_H
+#define polyDegree1_H
+
+#include "vector.H"
+#include "vector2D.H"
+#include "scalarField.H"
+#include "multiDimPolyFunctions.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-int main(int argc, char *argv[])
+namespace Foam
 {
 
-    //#include "foamNamespaceDemo.H"
-    //#include "linearDemo.H"
-    //#include "cubicDemo.H"
-    //#include "runTimeDemo.H"
+/*---------------------------------------------------------------------------*\
+                        Class polyDegree1 Declaration
+\*---------------------------------------------------------------------------*/
 
-    
-    float a = 2.23;
-    // float b = returnNumber(a);
-    float b = returnNumber<float>(a);//使用template
-    Info << "b is " << b << endl;
+class polyDegree1
+:
+    public multiDimPolyFunctions
+{
+public:
 
-    int d=5.65;
-    //int e=returnNumber(d);
-    int e=returnNumber<int>(d);//使用template
-    Info << "e is " << e << endl;
+    //- Runtime type information
+    TypeName("polyDegree1");
 
-    scalar scalar1;
-    scalar1=10.2;
-    scalar scalar2=returnNumber<scalar>(scalar1);
-    Info << "scalar value is " << scalar2 << endl;
 
-    printClass<int> obj1(a);
-    printClass<int> obj2;
+    // Constructors
 
-    return 0;
-}
+        //- Construct from nTerms
+        explicit polyDegree1(const labelVector& dirs);
 
+
+    //- Destructor
+    virtual ~polyDegree1() = default;
+
+
+    // Member Functions
+
+        virtual scalar value(const vector& vec);
+
+        virtual const scalarField& termValues(const vector& vec);
+};
+
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+} // End namespace Foam
+
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#endif
 
 // ************************************************************************* //

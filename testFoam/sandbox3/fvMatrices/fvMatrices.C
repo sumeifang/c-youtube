@@ -5,7 +5,7 @@
     \\  /    A nd           | www.openfoam.com
      \\/     M anipulation  |
 -------------------------------------------------------------------------------
-    Copyright (C) 2024 AUTHOR,AFFILIATION
+    Copyright (C) 2011 OpenFOAM Foundation
 -------------------------------------------------------------------------------
 License
     This file is part of OpenFOAM.
@@ -23,48 +23,28 @@ License
     You should have received a copy of the GNU General Public License
     along with OpenFOAM.  If not, see <http://www.gnu.org/licenses/>.
 
-Application
-    sandbox2
-
 Description
+     Finite-Volume matrix member static data members
 
 \*---------------------------------------------------------------------------*/
 
-#include "fvCFD.H"
-#include "linearEqn.H"
-#include "cubicEqn.H"
-#include "templateDemo.H"
+#include "fvMatrices.H"
+
 // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-int main(int argc, char *argv[])
+namespace Foam
 {
 
-    //#include "foamNamespaceDemo.H"
-    //#include "linearDemo.H"
-    //#include "cubicDemo.H"
-    //#include "runTimeDemo.H"
+// * * * * * * * * * * * * * * Static Data Members * * * * * * * * * * * * * //
 
-    
-    float a = 2.23;
-    // float b = returnNumber(a);
-    float b = returnNumber<float>(a);//使用template
-    Info << "b is " << b << endl;
+defineTemplateTypeNameAndDebug(fvScalarMatrix, 0);
+defineTemplateTypeNameAndDebug(fvVectorMatrix, 0);
+defineTemplateTypeNameAndDebug(fvSphericalTensorMatrix, 0);
+defineTemplateTypeNameAndDebug(fvSymmTensorMatrix, 0);
+defineTemplateTypeNameAndDebug(fvTensorMatrix, 0);
 
-    int d=5.65;
-    //int e=returnNumber(d);
-    int e=returnNumber<int>(d);//使用template
-    Info << "e is " << e << endl;
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
 
-    scalar scalar1;
-    scalar1=10.2;
-    scalar scalar2=returnNumber<scalar>(scalar1);
-    Info << "scalar value is " << scalar2 << endl;
-
-    printClass<int> obj1(a);
-    printClass<int> obj2;
-
-    return 0;
-}
-
+} // End namespace Foam
 
 // ************************************************************************* //
